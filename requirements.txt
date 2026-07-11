@@ -1,0 +1,5 @@
+openai>=1.50.0
+pydantic>=2.7.0
+PyGithub>=2.3.0
+python-dotenv>=1.0.1
+pytest>=8.2.0

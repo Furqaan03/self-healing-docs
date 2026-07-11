@@ -1,0 +1,26 @@
+name: "Self-Healing Docs"
+description: "Detect documentation made stale by code changes and open a fix PR or flag for review."
+inputs:
+  openai_api_key:
+    description: "OpenAI API key for staleness verification and repair"
+    required: true
+  confidence_threshold:
+    description: "Minimum staleness confidence to auto-fix (0-1)"
+    required: false
+    default: "0.85"
+  docs_glob:
+    description: "Glob for documentation files to check"
+    required: false
+    default: "**/*.md"
+outputs:
+  stale_sections:
+    description: "Number of documentation sections found stale"
+  corrections_generated:
+    description: "Number of corrections generated"
+runs:
+  using: "docker"
+  image: "Dockerfile"
+  env:
+    OPENAI_API_KEY: ${{ inputs.openai_api_key }}
+    CONFIDENCE_THRESHOLD: ${{ inputs.confidence_threshold }}
+    DOCS_GLOB: ${{ inputs.docs_glob }}
